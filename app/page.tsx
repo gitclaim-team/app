@@ -1,8 +1,8 @@
 "use client";
 
-import { LoginForm } from "@/components/login-form";
 import { useSession } from "next-auth/react";
 import DashboardPage from "./dashboard/page";
+import LoginPage from "./login/page";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -10,5 +10,5 @@ export default function Home() {
   if (session) {
     return <DashboardPage />;
   }
-  return <LoginForm />;
+  return <LoginPage />;
 }
