@@ -14,7 +14,7 @@ import {
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { AlertCircleIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { parseEther } from "viem";
 import { useAccount, useSendTransaction } from "wagmi";
@@ -23,7 +23,14 @@ export default function DashboardPage() {
   const account = useAccount();
   const { data: nextAuthSession } = useSession();
   const { openConnectModal } = useConnectModal();
-  const { sendTransaction, isPending } = useSendTransaction();
+  const { sendTransaction } = useSendTransaction();
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    if (nextAuthSession?.user) {
+      console.log("User is authenticated:", nextAuthSession.user.username);
+    }
+  }, [nextAuthSession]);
 
   const [issueUrl, setIssueUrl] = useState("");
   const [bountyAmount, setBountyAmount] = useState("");
@@ -63,7 +70,7 @@ export default function DashboardPage() {
           amount: bountyAmount.trim(),
           coin: "ETH",
           chain_id: "11155111",
-          bountyOwner: nextAuthSession?.user?.name,
+          bountyOwner: nextAuthSession?.user?.username,
         }),
       })
         .then((response) => response.json())
