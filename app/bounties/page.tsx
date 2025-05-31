@@ -172,7 +172,7 @@ export default function BountiesPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Owner</TableHead>
+                  <TableHead className="px-3">Owner</TableHead>
                   <TableHead>Repo</TableHead>
                   <TableHead>Issue</TableHead>
                   <TableHead>Languages</TableHead>
@@ -230,13 +230,12 @@ export default function BountiesPage() {
                           </Badge>
                         )}
                       </TableCell>
-                      <TableCell className="flex flex-col gap-1">
-                        <span>
-                          {bounty.pull_requests &&
-                          bounty.pull_requests.length > 0 ? (
-                            bounty.pull_requests.map((pr) => (
+                      <TableCell>
+                        {bounty.pull_requests &&
+                        bounty.pull_requests.length > 0 ? (
+                          bounty.pull_requests.map((pr) => (
+                            <div key={pr._id}>
                               <a
-                                key={pr._id}
                                 href={pr.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -244,13 +243,13 @@ export default function BountiesPage() {
                               >
                                 PR #{pr.number} by {pr.author}
                               </a>
-                            ))
-                          ) : (
-                            <span className="text-xs text-muted-foreground italic">
-                              No PRs
-                            </span>
-                          )}
-                        </span>
+                            </div>
+                          ))
+                        ) : (
+                          <span className="text-xs text-muted-foreground italic">
+                            No PRs
+                          </span>
+                        )}
                       </TableCell>
                     </TableRow>
                   );
