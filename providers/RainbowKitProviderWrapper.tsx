@@ -9,7 +9,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
+import { mainnet, polygon, optimism, arbitrum, sepolia } from "wagmi/chains";
 
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -24,6 +24,7 @@ const config = getDefaultConfig({
     [polygon.id]: http(),
     [optimism.id]: http(),
     [arbitrum.id]: http(),
+    [sepolia.id]: http(),
   },
   ssr: true,
 });
