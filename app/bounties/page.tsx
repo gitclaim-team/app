@@ -132,7 +132,7 @@ export default function BountiesPage() {
             that match your skills!
           </Label>
           <Textarea
-            placeholder="E.g. React, Next.js, Solidity..."
+            placeholder="I am good at React, Node.js, and Python. I want to work on open source projects that use these technologies."
             id="message"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
