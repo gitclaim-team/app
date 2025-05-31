@@ -1,3 +1,5 @@
+"use client";
+
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -23,8 +25,28 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 export default function DashboardPage() {
+  const account = useAccount();
+  const { openConnectModal } = useConnectModal();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Check if wallet is connected
+    if (account.status === "disconnected" && openConnectModal) {
+      // If not connected, open the connect modal
+      openConnectModal();
+    } else {
+      // If connected, you can proceed with form submission logic
+      console.log("Wallet is connected:", account.address);
+      // You can add your form submission logic here, such as sending data to an API
+      // Initiate transfer of ERC20 tokens to treasury
+    }
+  };
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -67,7 +89,7 @@ export default function DashboardPage() {
                   your project.
                 </p>
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid w-full items-center gap-3 border border-zinc-800 rounded-lg p-4">
                   <Label htmlFor="issueURL">
                     If the following GitHub issue
@@ -150,7 +172,9 @@ export default function DashboardPage() {
                 </div>
 
                 <Button type="submit" className="w-full cursor-pointer">
-                  Create Bounty
+                  {account.status === "disconnected"
+                    ? "Connect Wallet to Create Bounty"
+                    : "Create Bounty"}
                 </Button>
               </form>
             </div>
