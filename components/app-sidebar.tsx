@@ -22,11 +22,11 @@ const data = {
   navMain: [
     {
       title: "Bounties",
-      url: "/dashboard/bounties",
+      url: "/bounties",
       icon: DollarSign,
       isActive:
         typeof window !== "undefined" &&
-        window.location.pathname === "/dashboard/bounties",
+        window.location.pathname === "/bounties",
     },
   ],
 };
