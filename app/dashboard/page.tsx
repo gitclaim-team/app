@@ -17,13 +17,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { parseEther } from "viem";
-import {
-  useAccount,
-  useContractWrite,
-  useSendTransaction,
-  useSimulateContract,
-  useWriteContract,
-} from "wagmi";
+import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
 import chaChingAbi from "@/abis/cha-ching-abi.json";
 const contractAddress = process.env
   .NEXT_PUBLIC_CHA_CHING_CONTRACT_ADDRESS as `0x${string}`;
@@ -32,7 +26,6 @@ export default function DashboardPage() {
   const account = useAccount();
   const { data: nextAuthSession } = useSession();
   const { openConnectModal } = useConnectModal();
-  const { sendTransaction } = useSendTransaction();
 
   useEffect(() => {
     // Check if the user is authenticated
@@ -46,7 +39,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
 
   // First simulate the transaction
-  const { data: simulation, error: simulateError } = useSimulateContract({
+  const { data: simulation } = useSimulateContract({
     address: contractAddress,
     abi: chaChingAbi,
     functionName: "registerBounty",
@@ -61,7 +54,7 @@ export default function DashboardPage() {
     },
   });
 
-  const { writeContractAsync, isPending } = useWriteContract();
+  const { writeContractAsync } = useWriteContract();
 
   const handleRegister = async () => {
     if (!simulation) {
