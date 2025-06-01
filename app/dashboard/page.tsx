@@ -17,7 +17,16 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { parseEther } from "viem";
-import { useAccount, useSendTransaction } from "wagmi";
+import {
+  useAccount,
+  useContractWrite,
+  useSendTransaction,
+  useSimulateContract,
+  useWriteContract,
+} from "wagmi";
+import chaChingAbi from "@/abis/cha-ching-abi.json";
+const contractAddress = process.env
+  .NEXT_PUBLIC_CHA_CHING_CONTRACT_ADDRESS as `0x${string}`;
 
 export default function DashboardPage() {
   const account = useAccount();
@@ -35,6 +44,41 @@ export default function DashboardPage() {
   const [issueUrl, setIssueUrl] = useState("");
   const [bountyAmount, setBountyAmount] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  // First simulate the transaction
+  const { data: simulation, error: simulateError } = useSimulateContract({
+    address: contractAddress,
+    abi: chaChingAbi,
+    functionName: "registerBounty",
+    args: [
+      issueUrl,
+      "0x0000000000000000000000000000000000000000",
+      parseEther(bountyAmount || "0"),
+    ],
+    value: parseEther(bountyAmount || "0"),
+    query: {
+      enabled: !!issueUrl && !!bountyAmount && parseFloat(bountyAmount) > 0,
+    },
+  });
+
+  const { writeContractAsync, isPending } = useWriteContract();
+
+  const handleRegister = async () => {
+    if (!simulation) {
+      toast.error("Simulation failed, check input fields.");
+      return;
+    }
+
+    try {
+      await writeContractAsync(simulation.request);
+      toast.success("Bounty registered successfully!");
+      setIssueUrl("");
+      setBountyAmount("");
+    } catch (err) {
+      console.error(err);
+      toast.error("Transaction failed. Please try again.");
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,22 +118,11 @@ export default function DashboardPage() {
         }),
       })
         .then((response) => response.json())
-        .then(async (data) => {
+        .then((data) => {
           console.log("Bounty created:", data);
           // Transfer assets to treasury
           try {
-            await sendTransaction({
-              to:
-                (process.env.NEXT_PUBLIC_TREASURY_ADDRESS as `0x${string}`) ||
-                "",
-              value: parseEther(bountyAmount),
-            });
-            console.log(`Sent ${bountyAmount} ETH to treasury!`);
-
-            // Optionally, you can show a success message
-            toast(
-              "Your bounty has been created and the ETH has been sent to the treasury!"
-            );
+            handleRegister();
           } catch (err) {
             console.error("Error sending ETH:", err);
             setError(
