@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   </BreadcrumbItem>
                   <BreadcrumbSeparator className="hidden md:block" />
                   <BreadcrumbItem>
-                    <BreadcrumbPage>Who are you?!</BreadcrumbPage>
+                    <BreadcrumbPage>Create a bounty</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>

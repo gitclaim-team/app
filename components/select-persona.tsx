@@ -7,7 +7,7 @@ const SelectPersona: React.FC = () => {
   return (
     <div className="mt-24 max-w-xl w-full mx-auto">
       <div className="mb-6 text-center">
-        <h2 className="font-bold text-3xl">Who are you?</h2>
+        <h2 className="font-bold text-3xl">Create a bounty</h2>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Card className="w-full">

@@ -1,151 +1,151 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Sparkles, Github, Wallet, Zap, Bot } from "lucide-react";
-import { signIn, useSession } from "next-auth/react";
+import { BentoCard } from "@/components/bento-card";
+import { Button } from "@/components/button";
+import { Container } from "@/components/container";
+import { Footer } from "@/components/footer";
+import { Gradient } from "@/components/gradient";
+import { Keyboard } from "@/components/keyboard";
+import { Link } from "@/components/link";
+import { LogoCluster } from "@/components/logo-cluster";
+import { Map } from "@/components/map";
+import { Navbar } from "@/components/navbar";
+import { Heading, Subheading } from "@/components/text";
+import { ChevronRightIcon } from "@heroicons/react/16/solid";
+import { useSession } from "next-auth/react";
 
-export default function HomePage() {
-  const { data: session } = useSession();
-
+function Hero() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground px-4 py-12">
-      <section className="max-w-7xl w-full text-center space-y-4 mb-12">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          🚀 Welcome to <span className="text-primary">GitClaim</span>
-        </h1>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
-          Effortless, automated, and secure onchain bounty payouts for your
-          open-source projects.
-        </p>
-        <div className="flex justify-center gap-4 mt-4">
-          {session ? (
-            <Button
-              asChild
-              variant="default"
-              className="font-bold cursor-pointer"
+    <div className="relative">
+      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Container className="relative">
+        <Navbar
+          banner={
+            <Link
+              href=""
+              className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
             >
-              <a href="/dashboard">Open Dashboard</a>
+              Browse bounties. Submit PRs. Claim crypto. No login needed.{" "}
+              <ChevronRightIcon className="size-4" />
+            </Link>
+          }
+        />
+        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
+          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
+            Where Pull Requests Print Paychecks
+          </h1>
+          <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
+            Fix bugs, merge code, and collect your reward.
+          </p>
+          <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
+            <Button href="#">Get started</Button>
+            <Button variant="secondary" href="/pricing">
+              See pricing
             </Button>
-          ) : (
-            <Button
-              variant="default"
-              onClick={() => signIn("github")}
-              className="font-bold cursor-pointer"
-            >
-              Get Started
-            </Button>
-          )}
-          <Button
-            asChild
-            variant="secondary"
-            className="font-bold cursor-pointer"
-          >
-            <a
-              href="https://github.com/gitclaim-team/gitclaim"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn More
-            </a>
-          </Button>
+          </div>
         </div>
-      </section>
+      </Container>
+    </div>
+  );
+}
 
-      <section className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Github className="w-5 h-5 text-primary" />
-              <CardTitle>GitHub Integration</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Connect your GitHub repo and automate bounties for merged PRs,
-              issues, and more.
-            </p>
-          </CardContent>
-        </Card>
+function FeatureSection() {
+  return (
+    <div className="overflow-hidden">
+      <Container className="pb-24">
+        <Heading as="h2" className="max-w-3xl">
+          Pull Requests Printing Paychecks — Live Demo
+        </Heading>
+        <div className="mt-6 max-w-2xl text-lg/7 font-medium text-gray-950/75">
+          You don&apos;t need an account. You don&apos;t need a wallet. You
+          don&apos;t even need to talk to us. Just code. We&apos;ll handle the
+          rest.
+        </div>
+        <div className="mt-16 aspect-[1216/768] w-full sm:w-304">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="w-full h-full rounded-xl"
+          />
+        </div>
+      </Container>
+    </div>
+  );
+}
 
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Wallet className="w-5 h-5 text-primary" />
-              <CardTitle>Smart Contract Treasury</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Securely manage and store ETH bounties in a dedicated treasury on
-              Sepolia.
-            </p>
-          </CardContent>
-        </Card>
+function BentoSection() {
+  return (
+    <Container>
+      <Subheading>Sales</Subheading>
+      <Heading as="h3" className="mt-2 max-w-3xl">
+        Know more about your customers than they do.
+      </Heading>
 
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Bot className="w-5 h-5 text-primary" />
-              <CardTitle>GitHub Bot</CardTitle>
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+        <BentoCard
+          eyebrow="Insight"
+          title="Get perfect clarity"
+          description="Radiant uses social engineering to build a detailed financial picture of your leads. Know their budget, compensation package, social security number, and more."
+          graphic={
+            <div className="h-80 bg-[url(/screenshots/profile.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
+          }
+          fade={["bottom"]}
+          className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
+        />
+        <BentoCard
+          eyebrow="Analysis"
+          title="Undercut your competitors"
+          description="With our advanced data mining, you'll know which companies your leads are talking to and exactly how much they're being charged."
+          graphic={
+            <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat" />
+          }
+          fade={["bottom"]}
+          className="lg:col-span-3 lg:rounded-tr-4xl"
+        />
+        <BentoCard
+          eyebrow="Speed"
+          title="Built for power users"
+          description="It's never been faster to cold email your entire contact list using our streamlined keyboard shortcuts."
+          graphic={
+            <div className="flex size-full pt-10 pl-10">
+              <Keyboard highlighted={["LeftCommand", "LeftShift", "D"]} />
             </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Automate bounty triggers with PR merges, milestone completions, or
-              reaction thresholds.
-            </p>
-          </CardContent>
-        </Card>
+          }
+          className="lg:col-span-2 lg:rounded-bl-4xl"
+        />
+        <BentoCard
+          eyebrow="Source"
+          title="Get the furthest reach"
+          description="Bypass those inconvenient privacy laws to source leads from the most unexpected places."
+          graphic={<LogoCluster />}
+          className="lg:col-span-2"
+        />
+        <BentoCard
+          eyebrow="Limitless"
+          title="Sell globally"
+          description="Radiant helps you sell in locations currently under international embargo."
+          graphic={<Map />}
+          className="max-lg:rounded-b-4xl lg:col-span-2 lg:rounded-br-4xl"
+        />
+      </div>
+    </Container>
+  );
+}
 
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <CardTitle>Dark Mode Default</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Enjoy the hacker-friendly default dark mode UI built with
-              shadcn-ui.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-primary" />
-              <CardTitle>Fast & Flexible</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Built with Next.js 15, Wagmi, and shadcn for instant performance
-              and developer delight.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-muted/50 hover:shadow-xl transition-shadow">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs px-2 py-1">
-                Open Source
-              </Badge>
-              <CardTitle>Hackathon-Ready</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Fully open source, perfect for rapid iteration and hackathon
-              domination!
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-    </main>
+export default function Home() {
+  return (
+    <div className="overflow-hidden">
+      <Hero />
+      <main>
+        <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+          <FeatureSection />
+          <BentoSection />
+        </div>
+      </main>
+      <Footer />
+    </div>
   );
 }
