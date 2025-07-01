@@ -13,7 +13,7 @@ export default function HomePage() {
     <main className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground px-4 py-12">
       <section className="max-w-7xl w-full text-center space-y-4 mb-12">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          🚀 Welcome to <span className="text-primary">Cha-Ching</span>
+          🚀 Welcome to <span className="text-primary">GitClaim</span>
         </h1>
         <p className="max-w-2xl mx-auto text-muted-foreground">
           Effortless, automated, and secure onchain bounty payouts for your
@@ -43,7 +43,7 @@ export default function HomePage() {
             className="font-bold cursor-pointer"
           >
             <a
-              href="https://github.com/cha-ching-team/cha-ching"
+              href="https://github.com/gitclaim-team/gitclaim"
               target="_blank"
               rel="noopener noreferrer"
             >

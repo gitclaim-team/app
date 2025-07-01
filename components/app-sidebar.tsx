@@ -49,7 +49,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   alt="Logo"
                   className="!size-5"
                 />
-                <span className="text-base font-semibold">Cha-Ching</span>
+                <span className="text-base font-semibold">GitClaim</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

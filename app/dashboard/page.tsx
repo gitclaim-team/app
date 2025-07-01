@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { parseEther } from "viem";
 import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
-import chaChingAbi from "@/abis/cha-ching-abi.json";
+import chaChingAbi from "@/abis/gitclaim-abi.json";
 const contractAddress = process.env
   .NEXT_PUBLIC_CHA_CHING_CONTRACT_ADDRESS as `0x${string}`;
 

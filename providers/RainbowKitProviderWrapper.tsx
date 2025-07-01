@@ -23,7 +23,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 const queryClient = new QueryClient();
 
 const config = getDefaultConfig({
-  appName: "Cha-Ching",
+  appName: "GitClaim",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   chains: [mainnet, polygon, optimism, arbitrum, sepolia, optimismSepolia],
   transports: {
