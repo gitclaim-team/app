@@ -7,12 +7,21 @@ import { Bars2Icon } from "@heroicons/react/24/solid";
 import { Link } from "./link";
 import { PlusGrid, PlusGridItem, PlusGridRow } from "./plus-grid";
 import { Button } from "./button";
+import { signIn, useSession } from "next-auth/react";
 
 function DesktopNav() {
+  const { data: session } = useSession();
+
   return (
     <nav className="relative hidden lg:flex items-center">
       <div className="flex flex-col gap-x-6 gap-y-4 sm:flex-row">
-        <Button href="#">Offer a bounty on GitHub</Button>
+        {session ? (
+          <Button>
+            <a href="/dashboard">Offer a bounty on GitHub</a>
+          </Button>
+        ) : (
+          <Button onClick={() => signIn("github")}>Sign In with GitHub</Button>
+        )}
         <Button variant="secondary" href="/bounties">
           Claim a bounty
         </Button>

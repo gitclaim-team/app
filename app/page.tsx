@@ -38,15 +38,15 @@ function Hero() {
           </p>
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
             {session ? (
-              <Button href="#">Offer a bounty on GitHub</Button>
+              <Button>
+                <a href="/dashboard">Offer a bounty on GitHub</a>
+              </Button>
             ) : (
-              <Button href="#">Sign In with GitHub</Button>
+              <Button onClick={() => signIn("github")}>
+                Sign In with GitHub
+              </Button>
             )}
-            <Button
-              variant="secondary"
-              href="/bounties"
-              onClick={() => signIn("github")}
-            >
+            <Button variant="secondary" href="/bounties">
               Claim a bounty
             </Button>
           </div>
@@ -105,7 +105,7 @@ function BentoSection() {
         <BentoCard
           eyebrow="Step 2"
           title="Fix It Like a Legend"
-          description="Fork the repo. Do your magic. Submit a Pull Request like it’s 2013."
+          description="Fork the repo. Do your magic. Submit a Pull Request like it's 2013."
           graphic={
             <div className="h-80 bg-[url(/02.png)] bg-size-[633px_339px] bg-no-repeat" />
           }
