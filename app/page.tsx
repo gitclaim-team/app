@@ -3,7 +3,7 @@
 import { BentoCard } from "@/components/bento-card";
 import { Button } from "@/components/button";
 import { Container } from "@/components/container";
-import { Footer } from "@/components/footer";
+// import { Footer } from "@/components/footer";
 import { Gradient } from "@/components/gradient";
 import { Link } from "@/components/link";
 import { Navbar } from "@/components/navbar";
@@ -146,7 +146,7 @@ export default function Home() {
           <FeatureSection />
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
