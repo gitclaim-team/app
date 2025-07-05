@@ -70,7 +70,7 @@ function FeatureSection() {
         </div>
         <div className="mt-16 aspect-[1216/768] w-full sm:w-304">
           <iframe
-            src="https://www.youtube.com/watch?v=bKmJ3onFG4A"
+            src="https://www.youtube.com/embed/bKmJ3onFG4A"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
